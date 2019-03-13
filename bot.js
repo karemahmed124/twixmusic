@@ -1,44 +1,35 @@
 const Discord = require('discord.js');
-const { Client, Util } = require('discord.js');
-const client = new Discord.Client();
-const { PREFIX, GOOGLE_API_KEY } = require('./config');
-const prefix = '1'
-const YouTube = require('simple-youtube-api');
-const ytdl = require('ytdl-core');
-const youtube = new YouTube(GOOGLE_API_KEY);
-const queue = new Map();
-const moment = require('moment');
-const fs = require("fs");
-const coolDown = new Set();
-const Canvas = require('canvas');
-const db = require('quick.db')
-const ms = require('ms')
-const bot = new Discord.Client();
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-  console.log('')
-  console.log('')
-  console.log('╔[═════════════════════════════════════════════════════════════════]╗')
-  console.log(`[Start] ${new Date()}`);
-  console.log('╚[═════════════════════════════════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════════════════════════════]╗');
-  console.log(`Logged in as * [ " ${client.user.username} " ]`);
-  console.log('')
-  console.log('Informations :')
-  console.log('')
-  console.log(`servers! [ " ${client.guilds.size} " ]`);
-  console.log(`Users! [ " ${client.users.size} " ]`);
-  console.log(`channels! [ " ${client.channels.size} " ]`);
-  console.log('╚[════════════════════════════════════]╝')
-  console.log('')
-  console.log('╔[════════════]╗')
-  console.log(' Bot Is Online')
-  console.log('╚[════════════]╝')
-  console.log('')
-  console.log('')
+const Util = require('discord.js');
+
+const getYoutubeID = require('get-youtube-id');
+
+const fetchVideoInfo = require('youtube-info');
+
+const YouTube = require('simple-youtube-api');
+
+const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
+
+const queue = new Map();
+
+const ytdl = require('ytdl-core');
+
+const fs = require('fs');
+
+const gif = require("gif-search");
+
+const client = new Discord.Client({disableEveryone: true});
+
+const prefix = "1";
+
+var antispam = require("anti-spam");
+
+client.on('ready', function() {
+    console.log(`i am ready ${client.user.username}`);
 });
+
+
+
 
 client.on('message', async msg => { 
 	if (msg.author.bot) return undefined;
